@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/project.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의 목록</title>
+</head>
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/item/list">교육과정</a></li>
+            <li><a href="/user/introduction">강사소개</a></li>
+            <li><a href="/qna/list">Q&A</a></li>
+            <li><a href="/cart/list">장바구니</a></li>
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/qna/list'">Q&A</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/cart/list'">장바구니</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/auth/login'">로그인</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/auth/logout'">로그아웃</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/user/course'">마이페이지</a></li>-->
+            <li><a href="/auth/login">로그인</a></li>
+            <li><a href="/auth/admin/login">관리자</a></li>
+            <li><a href="/user/course">마이페이지</a></li>
+        </ul>
+    </nav>
+    <h2><a href="/item/list">딸기말차의 강의</a></h2>
+</header>
+
+<form action="/item/list" method="get">
+
+    <span class="selectBox">
+    <select name="category" class="category">
+        <option value="">언어</option>
+        <option value="JAVA">JAVA</option>
+        <option value="PYTHON">PYTHON</option>
+        <option value="C">C</option>
+    </select>
+    <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
+                                alt=""></span>
+    </span>
+
+    <span class="selectBox">
+    <select name="search" class="search">
+        <option value="title">제목</option>
+        <option value="content">내용</option>
+        <option value="titleContent">제목+내용</option>
+    </select>
+    <span class="icoArrow"><img src="https://freepikpsd.com/media/2019/10/down-arrow-icon-png-7-Transparent-Images.png"
+                                alt=""></span>
+    </span>
+
+    <br/>
+    <span class="searchInput">
+    <input type="text" name="keyword" class="keyword"/>
+    <input type="submit" value="검색"/>
+    </span>
+</form>
+
+<div class="lecture-box">
+    <div class="lecture-container">
+        <div th:each="item : ${itemList}">
+            <a th:href="@{/item/detail/{category}/{id}(category=${item.category}, id=${item.id})}"><img
+                    class="lecture-img" th:src="'/video/' + ${item.thumbnailFileName}"/></a>
+            <br/>
+            <div class="lecture-title">
+                <span><a th:text="${item.title}"
+                         th:href="@{/item/detail/{category}/{id}(category=${item.category}, id=${item.id})}"></a></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 링크도 작동안하는 바보같은 코드...gpt 바보!!!!-->
+<!--<nav>-->
+<!--    <ul class="pagination">-->
+<!--        <li th:if="${currentPage > 0}">-->
+<!--            <a th:href="@{'/item/list?page=0'}">1</a>-->
+<!--        </li>-->
+<!--        <li th:if="${currentPage > 1}">-->
+<!--            <span>...</span>-->
+<!--        </li>-->
+<!--        <li th:if="${currentPage > 0}">-->
+<!--            <a th:href="@{'/item/list?page=' + (currentPage - 1)}" th:text="${currentPage} - 1"></a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <span th:text="${currentPage + 1}"></span>-->
+<!--        </li>-->
+<!--        <li th:if="${currentPage < totalPages - 1}">-->
+<!--            <a th:href="@{'/item/list?page=' + (currentPage + 1)}" th:text="${currentPage + 2}"></a>-->
+<!--        </li>-->
+<!--        <li th:if="${currentPage < totalPages - 2}">-->
+<!--            <span>...</span>-->
+<!--        </li>-->
+<!--        <li th:if="${currentPage < totalPages - 1}">-->
+<!--            <a th:href="@{'/item/list?page=' + (totalPages - 1)}" th:text="${totalPages}"></a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<!-- 페이지 번호 생성 -->
+<div class="page">
+    <ul class = "pagination modal">
+    <!-- 첫번째 페이지로 이동 -->
+    <li><a class="first" th:href="@{/item/list(page=0, size=8)}">첫 페이지 </a></li>
+    <!-- 이전 링크 활성화 비활성화 -->
+<!--    <a th:href="${itemList.isFirst()} ? '#' : @{/item/list(page=${itemList.number}, size=5)}"> 이전 </a>-->
+        <!-- 페이지 번호 링크(현재 페이지는 숫자만) for(int page=startPage; page<=endPage; page++)-->
+<!--    <span th:with="endPage=(${totalItemCount - 1}) / ${itemsPerPage}"></span>-->
+    <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+        <!-- 현재페이지는 링크 없이 숫자만 -->
+        <span th:if="${page == itemList.number + 1}"></span>
+        <li><a class="num" th:href="@{/item/list(page=${page},size=8)}" th:text="${page} + 1"></a></li>
+        <!-- 현재페이지 링크 X, 다른 페이지번호에는 링크를 보여준다 -->
+<!--        <span th:unless="${page == itemList.number + 1}">-->
+<!--            <a th:href="@{/item/list(page=${page},size=8)}" th:text="${page}"></a>-->
+<!--        </span>-->
+         </span>
+<!--    &lt;!&ndash; 다음 링크 활성화 비활성화 &ndash;&gt;-->
+<!--    <a th:href="${itemList.number == endPage} ? '#' : @{/item/list(page=${itemList.number + 5},size=5)}"> 다음 </a>-->
+        <!-- 마지막 페이지로 이동 -->
+    <a th:href="@{/item/list(page=${endPage},size=8)}"> 마지막 페이지 </a>
+    </ul>
+</div>
+
+
+<!--아쉬워요-->
+<!--<nav aria-label="Page navigation example">-->
+<!--    <ul class="pagination">-->
+<!--        <li class="page-item" th:classappend="${1 == itemList.pageable.pageNumber + 1} ? 'disabled' : '' ">-->
+<!--            <a class="page-link" th:href="@{/item/list(page=${itemList.pageable.pageNumber - 1})}">Previous</a>-->
+<!--        </li>-->
+<!--        <li class="page-item" th:classappend="${i == itemList.pageable.pageNumber + 1} ? 'active' : '' " th:each="i : ${#numbers.sequence(startPage, endPage)}">-->
+<!--            <a class="page-link" th:href="@{/item/list(page=${i - 1})}" th:text="${i}">1</a>-->
+<!--        </li>-->
+<!--        <li class="page-item" th:classappend="${itemList.totalPages == itemList.pageable.pageNumber + 1} ? 'disabled' : '' ">-->
+<!--            <a class="page-link" th:href="@{/item/list(page=${itemList.pageable.pageNumber + 1})}">Next</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+<!--0과 2-->
+<!--<div style="text-align: center;">-->
+<!--    <ul class="pagination" th:with="start=${(itemList.number/itemList.size)*itemList.size + 1},-->
+<!--         end=(${(itemList.totalPages == 0) ? 1 : (start + (itemList.size - 1) < itemList.totalPages ? start + (itemList.size - 1) : itemList.totalPages)})">-->
+<!--        <li th:if="${start > 0}">-->
+<!--            <a th:href="@{/item/list(page=0)}" th:text="'<<'"></a>-->
+<!--        </li>-->
+<!--        <li th:if="${start > 0}">-->
+<!--            <a th:href="@{/item/list(page=${start - 1})}" th:text="'<'"></a>-->
+<!--        </li>-->
+
+<!--        <li th:each="page: ${#numbers.sequence(start, end)}">-->
+<!--            <a th:text="${page}" th:href="@{/item/list(page=${page - 1})}"></a>-->
+<!--        </li>-->
+
+<!--        <li th:if="${end < itemList.totalPages + 1}">-->
+<!--            <a th:href="@{/item/list(page=${start + 1})}" th:text="'>'"></a>-->
+<!--        </li>-->
+<!--        <li th:if="${end < itemList.totalPages + 1}">-->
+<!--            <a th:href="@{/item/list(page=${itemList.totalPages - 1})}" th:text="'>>'"></a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+<!--정체를 알수 없음-->
+<!--<div class="pagination">-->
+<!--    <ul>-->
+<!--        <li th:if="${itemList.pageable.}">-->
+<!--            <a th:href="@{'/item/list?page=' + ${itemList.number - 1}}">&laquo; 이전</a>-->
+<!--        </li>-->
+
+<!--        &lt;!&ndash; 현재 페이지 주변의 페이지 번호 표시 &ndash;&gt;-->
+<!--        <li th:each="i : ${#numbers.sequence(0, itemList.totalPages - 1)}"-->
+<!--            th:class="${itemList.number == i ? 'active' : ''}">-->
+<!--            &lt;!&ndash; 현재 페이지 주변에 페이지 번호를 표시 &ndash;&gt;-->
+<!--            <span th:if="${i >= itemList.number - 2 and i <= itemList.number + 2}">-->
+<!--                    <a th:href="@{'/item/list?page=' + ${i}}" th:text="${i + 1}"></a>-->
+<!--                </span>-->
+<!--        </li>-->
+
+<!--        <li th:if="${itemList.hasNext()}">-->
+<!--            <a th:href="@{'/item/list?page=' + ${itemList.number + 1}}">다음 &raquo;</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+
+</body>
+<footer>
+    <div style="text-align : center;">
+        <p>ⓒ COVISCON Corp. All rights reserved.</p>
+    </div>
+</footer>
+</html>

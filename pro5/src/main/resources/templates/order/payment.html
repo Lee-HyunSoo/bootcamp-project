@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>iamport</title>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+</head>
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/item/list">교육과정</a></li>
+            <li><a href="/user/introduction">강사소개</a></li>
+            <li><a href="/qna/list">Q&A</a></li>
+            <li><a href="/cart/list">장바구니</a></li>
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/qna/list'">Q&A</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/cart/list'">장바구니</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/auth/login'">로그인</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/auth/logout'">로그아웃</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/user/course'">마이페이지</a></li>-->
+            <li><a href="/auth/login">로그인</a></li>
+            <li><a href="/auth/admin/login">관리자</a></li>
+            <li><a href="/user/course">마이페이지</a></li>
+        </ul>
+    </nav>
+</header>
+
+<hr style="border:0; height:1px; background: #bbb;">
+<!--<form method="post" th:action="@{/qna/create/comment}" enctype="multipart/form-data">-->
+<h2>신청하기</h2>
+<h3>Step2 : 결제</h3>
+<hr style="border:0; height:1px; background: #bbb;">
+** 선택 강의 내역을 확인해주세요
+
+<h4>신청자 정보</h4>
+<p>이름 : <input type="text" name="name" th:value="${paymentDto.name}" readonly/></p>
+<p>이메일 주소 : <input type="email" name="email" th:value="${paymentDto.email}" readonly/></p>
+<p>휴대폰 번호 : <input type="tel" name="tel" th:value="${paymentDto.tel}" readonly/></p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>상품명</th>
+        <th>수량</th>
+        <th>가격</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <th:block th:each="item : ${paymentDto.getItems()}">
+        <tr>
+            <td th:text="${item.getTitle()}"></td>
+            <td th:text="${item.getQuantity()}"></td>
+            <td th:text="${item.getPrice()}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+<hr style="border:0; height:1px; background: #bbb;">
+<input type="checkbox" name="이용약관" required>본인은 웹 사이트<a href="./contract.html">이용악관</a>을 읽었으며, 이에 동의합니다.</input>
+
+
+<button th:onclick="requestPay(this.getAttribut)">결제하기</button>
+
+<script th:inline="javascript">
+    var IMP = window.IMP;
+    IMP.init("imp72554883"); // 예: imp00000000
+
+    function requestPay(paymentDto) {
+        // IMP.request_pay(param, callback) 결제창 호출
+        IMP.request_pay({ // param
+            pg: "html5_inicis",
+            pay_method: "card", // "card"만 지원됩니다
+            merchant_uid: [[${paymentDto.merchantUid}]], // 빌링키 발급용 주문번호
+            customer_uid: [[${paymentDto.username}]], // 카드(빌링키)와 1:1로 대응하는 값
+            name: 'IT 강의',
+            amount: [[${paymentDto.price}]], // 0 으로 설정하여 빌링키 발급만 진행합니다.
+            buyer_email: [[${paymentDto.email}]],
+            buyer_name: [[${paymentDto.name}]],
+            buyer_tel: [[${paymentDto.tel}]],
+            buyer_addr: [[${paymentDto.address}]],
+            buyer_postcode: [[${paymentDto.postcode}]]
+        }, function (rsp) { // callback
+            $.ajax({
+                type: 'POST',
+                url: '/verify/' + rsp.imp_uid
+            }).done(function (data) {
+                if (rsp.paid_amount === data.response.amount) {
+                    alert("결제 성공");
+                    location.href = "/item/list"
+                } else {
+                    alert("결제 실패");
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

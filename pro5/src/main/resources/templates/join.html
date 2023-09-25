@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <meta charset="UTF-8">
+    <title>join</title>
+
+</head>
+<!--<script src="https://code.jquery.com/jquery-3.4.1.js"></script>-->
+<!--<script>-->
+<!--    function join() {-->
+<!--        let data = {-->
+<!--            "username": $('#username').val(),-->
+<!--            "password": $('#password').val(),-->
+<!--            "identifier": $('#identifier').val(),-->
+<!--            "email": $('#email').val(),-->
+<!--            "tel": $('#tel').val(),-->
+<!--            "city": $('#city').val(),-->
+<!--            "street": $('#street').val(),-->
+<!--            "zipcode": $('#zipcode').val()-->
+<!--        }-->
+<!--        $.ajax({-->
+<!--            type: "POST",-->
+<!--            url: "/auth/join",-->
+<!--            contentType: 'application/json',-->
+<!--            data: JSON.stringify(data),-->
+<!--            dataType: 'json',-->
+<!--        }).done(function () {-->
+<!--            location.href = '/auth/login'-->
+<!--        }).fail(function (error) {-->
+<!--            alert(error.data)-->
+<!--        })-->
+<!--      $("#joinForm").submit();-->
+<!--    }-->
+
+
+<!--</script>-->
+
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/item/list">교육과정</a></li>
+            <li><a href="/user/introduction">강사소개</a></li>
+            <li><a href="/qna/list">Q&A</a></li>
+            <li><a href="/cart/list">장바구니</a></li>
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/qna/list'">Q&A</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/cart/list'">장바구니</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/auth/login'">로그인</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/auth/logout'">로그아웃</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/user/course'">마이페이지</a></li>-->
+            <li><a href="/auth/login">로그인</a></li>
+            <li><a href="/auth/admin/login">관리자</a></li>
+            <li><a href="/user/course">마이페이지</a></li>
+        </ul>
+    </nav>
+</header>
+
+<form id="joinForm" action="/auth/join" method="post">
+    아이디 : <input type="text" id="username" name="username"> <br>
+    비밀번호 : <input type="password" id="password" name="password"> <br>
+    닉네임 : <input type="text" id="identifier" name="identifier"> <br>
+    이메일 : <input type="email" id="email" name="email"> <br>
+    전화번호 : <input type="tel" id="tel" name="tel"> <br>
+    주소 : <input type="text" id="city" name="city">
+    <input type="text" id="street" name="street" placeholder="">
+    <input type="text" id="zipcode" name="zipcode"> <br>
+    <input type="submit" value="회원가입"/> <br>
+</form>
+</body>
+<footer>
+    <div style="text-align : center;">
+        <p>ⓒ COVISCON Corp. All rights reserved.</p>
+    </div>
+</footer>
+</html>

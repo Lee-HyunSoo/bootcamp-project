@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+</head>
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/item/list">교육과정</a></li>
+            <li><a href="/user/introduction">강사소개</a></li>
+            <li><a href="/qna/list">Q&A</a></li>
+            <li><a href="/cart/list">장바구니</a></li>
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/qna/list'">Q&A</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/cart/list'">장바구니</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/auth/login'">로그인</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/auth/logout'">로그아웃</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/user/course'">마이페이지</a></li>-->
+            <li><a href="/auth/login">로그인</a></li>
+            <li><a href="/auth/admin/login">관리자</a></li>
+            <li><a href="/user/course">마이페이지</a></li>
+        </ul>
+    </nav>
+</header>
+<div>
+    <hr style="border:0; height:1px; background: #bbb;">
+    <h1>신청하기</h1>
+    <h2>Step1 : 강의 선택</h2>
+    <hr style="border:0; height:1px; background: #bbb;">
+
+    <table border="1" id="result_data">
+        <thead>
+        <tr>
+            <th>선택 항목</th>
+            <th>주문 번호</th>
+            <th>강좌</th>
+            <th>수량</th>
+            <th>가격</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="item : ${itemDto}">
+            <!--            <td><input type="checkbox" name='selectedItem'></td>-->
+            <td th:text="${item.getId()}" id="itemId"></td>
+            <td th:text="${item.getTitle()}"></td>
+            <td th:text="${item.getPrice()}"></td>
+            <td th:text="${item.getQuantity()}"></td>
+        </th:block>
+        </tbody>
+    </table>
+
+    <input type="button" class="button" value="결제 진행하기" onclick="location.href = '/createOrder'"/>
+    <!--    <input type="button" class="button" value="선택 항목 삭제" onClick="deleteSelectedItems()" />-->
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<!--<script type="text/javascript">-->
+<!--    $(function(){-->
+<!--        initData();-->
+<!--    });-->
+
+<!--    function deleteSelectedItems() {-->
+<!--        let selectedItems = [];-->
+<!--        let checkboxes = document.querySelectorAll('input[name="selectedItem"]:checked');-->
+<!--        checkboxes.forEach(function(checkbox, index) {-->
+<!--            selectedItems.push(checkbox.value);-->
+<!--        });-->
+
+<!--        if (selectedItems.length === 0) {-->
+<!--            alert("선택된 품목이 없습니다.");-->
+<!--            return;-->
+<!--        }-->
+
+<!--        $.ajax({-->
+<!--            type: "DELETE", // 장바구니에서 삭제-->
+<!--            url: "/api/orders/deleteOrderItems",-->
+<!--            data: JSON.stringify(selectedItems),-->
+<!--            contentType: 'application/json',-->
+<!--            success: function (data) {-->
+<!--                alert("선택된 강의가 삭제되었습니다.");-->
+<!--            },-->
+<!--            error: function (xhr, status, error) {-->
+<!--                alert("삭제 중 오류가 발생하였습니다.");-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+
+
+<!--</script>-->
+<!-- Footer 추가 -->
+<footer>
+    <div style="text-align : center;">
+        <p>ⓒ COVISCON Corp. All rights reserved.</p>
+    </div>
+</footer>
+</html>

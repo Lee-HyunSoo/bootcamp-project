@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/item/list">교육과정</a></li>
+            <li><a href="/user/introduction">강사소개</a></li>
+            <li><a href="/qna/list">Q&A</a></li>
+            <li><a href="/cart/list">장바구니</a></li>
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/qna/list'">Q&A</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/cart/list'">장바구니</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/auth/login'">로그인</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/auth/logout'">로그아웃</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/user/course'">마이페이지</a></li>-->
+            <li><a href="/auth/login">로그인</a></li>
+            <li><a href="/auth/admin/login">관리자</a></li>
+            <li><a href="/user/course">마이페이지</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="mainImg">
+    <img src="/images/introduction.png" width="680px" alt="">
+</div>
+</body>
+<footer>
+    <div style="text-align : center;">
+        <p>ⓒ COVISCON Corp. All rights reserved.</p>
+    </div>
+</footer>
+</html>

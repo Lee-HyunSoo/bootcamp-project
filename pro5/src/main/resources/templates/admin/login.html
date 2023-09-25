@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <meta charset="UTF-8">
+    <title>관리자 로그인 페이지</title>
+</head>
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/admin/items"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/admin/users">회원관리</a></li>
+            <li><a href="/admin/items">강의목록</a></li>
+            <li><a href="/admin/qnas">Q&A</a></li>
+            <li><a href="/auth/login">사용자</a></li>
+        </ul>
+    </nav>
+
+    <h2><a href="/auth/admin/login">관리자 로그인</a></h2>
+</header>
+
+<form th:action="@{/auth/admin/login}" method="post">
+    <p>아이디 : <input type="text" id="username" name="username" /></p>
+    <p>비밀번호 : <input type="password" id="password" name="password" /></p>
+    <p><input type="submit" value="로그인" /></p>
+</form>
+
+</body>
+<footer>
+    <div style="text-align : center;">
+        <p>ⓒ COVISCON Corp. All rights reserved.</p>
+    </div>
+</footer>
+</html>

@@ -1,0 +1,93 @@
+/* querydsl */
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	/* querydsl */
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+}
+
+group = 'com.like'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	/* querydsl */
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+	/* tus */
+	implementation "me.desair.tus:tus-java-server:1.0.0-2.0"
+	implementation 'org.jcodec:jcodec-javase:0.2.5'
+
+	/* HTTP Live Streaming */
+	implementation 'net.bramp.ffmpeg:ffmpeg:0.7.0'
+
+	/* iamport */
+	implementation 'com.github.iamport:iamport-rest-client-java:0.2.21'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	/* jwt */
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+/* querydsl */
+/* querydsl 파일 저장할 경로를 String 으로 저장 */
+def querydslDir = "$buildDir/generated/querydsl"
+/* jpa 사용, querydsl 경로 설정 */
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+/* main.java.src 폴더 내에서 사용 */
+sourceSets {
+	main.java.srcDir querydslDir
+}
+/* querydsl 컴파일 경로 */
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+/* 컴파일 */
+compileQuerydsl {
+	options.annotationProcessorPath = configurations.querydsl
+}

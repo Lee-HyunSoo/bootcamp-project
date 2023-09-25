@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/project.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QnA 게시판</title>
+</head>
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/admin/items"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/admin/users">회원관리</a></li>
+            <li><a href="/admin/items">강의목록</a></li>
+            <li><a href="/admin/qnas">Q&A</a></li>
+            <li><a href="/auth/login">사용자</a></li>
+        </ul>
+    </nav>
+
+    <h2><a href="/admin/qnas">관리자 QnA 게시판</a></h2>
+</header>
+
+<div>
+    <form action="/admin/qnas" method="get">
+        <span class="selectBox">
+            <select name="search" class="search">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+            </select>
+        </span>
+        <span class="searchInput">
+            <input type="text" name="keyword" class="keyword" />
+            <input type="submit" value="검색" />
+        </span>
+    </form>
+
+    <table>
+        <thead>
+        <tr>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="qna : ${qnas}">
+            <td>
+                <a th:href="@{/qna/detail/{qnaId}(qnaId=${qna.qnaId})}" th:text="${qna.title}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <input type="button" class="button2" value="목록" onClick="location.href='/admin/qnas'" />
+</div>
+</body>
+
+<footer>
+    <div style="text-align : center;">
+        <p>ⓒ COVISCON Corp. All rights reserved.</p>
+    </div>
+</footer>
+</html>

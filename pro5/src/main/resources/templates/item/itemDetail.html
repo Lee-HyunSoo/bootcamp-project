@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/project.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강의 상세 페이지</title>
+</head>
+<body>
+<header>
+    <nav id="nav3">
+        <a href="/"><img src="/images/header.png" width="300" height="60"></a>
+        <ul>
+            <li><a href="/item/list">교육과정</a></li>
+            <li><a href="/user/introduction">강사소개</a></li>
+            <li><a href="/qna/list">Q&A</a></li>
+            <li><a href="/cart/list">장바구니</a></li>
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/qna/list'">Q&A</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/cart/list'">장바구니</a></li>-->
+            <!--            <li><a sec:authorize="isAnonymous()" onclick="location.href='/auth/login'">로그인</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/auth/logout'">로그아웃</a></li>-->
+            <!--            <li><a sec:authorize="isAuthenticated()" onclick="location.href='/user/course'">마이페이지</a></li>-->
+            <li><a href="/auth/login">로그인</a></li>
+            <li><a href="/auth/admin/login">관리자</a></li>
+            <li><a href="/user/course">마이페이지</a></li>
+        </ul>
+    </nav>
+
+    <h2>강의 상세 페이지</h2>
+</header>
+
+<div class="video-container">
+    <h3 th:text="${itemDetail.title}"></h3>
+    <span>
+            <img class="video-img" th:src="'/video/' + ${itemDetail.thumbnailFileName}" />
+        </span>
+    <h5 th:text="${itemDetail.content}"></h5>
+</div>
+
+<form method="post" th:action="@{/add/cart}">
+    <input type="hidden" name="title" th:value="${itemDetail.title}">
+    <input type="hidden" name="content" th:value="${itemDetail.content}">
+    <input type="hidden" name="price" th:value="${itemDetail.price}">
+    <input type="hidden" name="quantity" th:value="${itemDetail.quantity}">
+    <input type="hidden" name="category" th:value="${itemDetail.category}">
+    <input type="hidden" name="videoFileName" th:value="${itemDetail.videoFileName}">
+    <input type="hidden" name="thumbnailFileName" th:value="${itemDetail.thumbnailFileName}">
+    <input type="submit" value="신청하기" />
+</form>
+
+<h2>추천 도서</h2>
+<div class="book" >
+    <div th:each="book : ${bookList}">
+        <span><img class="book-img" th:src="'/video/' + ${book.thumbnailFileName}" /></span>
+        <div class="book-info">
+            <p th:text="${book.title}"></p>
+            <p th:text="${book.author}"></p>
+            <p th:text="${book.press}"></p>
+        </div>
+    </div>
+</div>
+</body>
+<footer>
+    <div style="text-align : center;">
+        <p>ⓒ COVISCON Corp. All rights reserved.</p>
+    </div>
+</footer>
+</html>
