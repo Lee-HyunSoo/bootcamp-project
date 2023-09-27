@@ -1,0 +1,241 @@
+db명:db_cafe
+
+create table cafe (
+    seqNo int not null auto_increment,
+    store varchar(10) not null,    
+    menu varchar(10) not null,
+    price int not null,
+    isCoupon int default 0,
+    time varchar(30),
+    primary key(seqNo) 
+);
+
+create table coupon (
+    seqNo int not null auto_increment,
+    store varchar(10) not null,    
+    menu varchar(10) not null,
+    primary key(seqNo) 	
+);
+
+create table cafepayment(
+    seqNo int not null auto_increment,
+    store varchar(10) not null,    
+    menu varchar(10) not null,
+    price int not null,
+    time varchar(30),
+    primary key(seqNo) 	
+);
+
+
+Coupon table
+insert into coupon (store, menu) values ('starbucks', '자바 칩');
+insert into coupon (store, menu) values ('starbucks', '얼 그레이 티');
+insert into coupon (store, menu) values ('starbucks', '망고 바나나');
+insert into coupon (store, menu) values ('starbucks', '민트 티');
+insert into coupon (store, menu) values ('starbucks', '녹차 티');
+insert into coupon (store, menu) values ('starbucks', '딸기 스무디');
+insert into coupon (store, menu) values ('starbucks', '멜론 스무디');
+insert into coupon (store, menu) values ('ediya', '민트 티');
+insert into coupon (store, menu) values ('ediya', '블렉 티');
+insert into coupon (store, menu) values ('ediya', '유자 티');
+insert into coupon (store, menu) values ('ediya', '에스프레소');
+insert into coupon (store, menu) values ('ediya', '망고 바나나');
+insert into coupon (store, menu) values ('ediya', '콜드 블루');
+insert into coupon (store, menu) values ('ediya', '바닐라 요거트');
+insert into coupon (store, menu) values ('ediya', '딸기 스무디');
+insert into coupon (store, menu) values ('twosome', '카푸치노');
+insert into coupon (store, menu) values ('twosome', '라임 티');
+insert into coupon (store, menu) values ('twosome', '망고 바나나');
+insert into coupon (store, menu) values ('twosome', '초콜릿 모카');
+insert into coupon (store, menu) values ('twosome', '자바 칩');
+insert into coupon (store, menu) values ('twosome', '멜론 스무디');
+insert into coupon (store, menu) values ('twosome', '망고 스무디');
+insert into coupon (store, menu) values ('twosome', '아이스티');
+
+Cafe table
+insert into cafe (store, menu, price) values ('starbucks', '아메리카노', 4500);
+insert into cafe (store, menu, price) values ('starbucks', '돌체라떼', 5900);
+insert into cafe (store, menu, price) values ('starbucks', '카페모카', 4500);
+insert into cafe (store, menu, price) values ('starbucks', '카페라떼', 5000);
+insert into cafe (store, menu, price) values ('starbucks', '에스프레소', 4800);
+insert into cafe (store, menu, price) values ('starbucks', '카푸치노', 4900);
+insert into cafe (store, menu, price) values ('starbucks', '민트 티', 5800);
+insert into cafe (store, menu, price) values ('starbucks', '유자 티', 5900);
+insert into cafe (store, menu, price) values ('starbucks', '녹차 티', 5900);
+insert into cafe (store, menu, price) values ('starbucks', '라임 티', 3900);
+insert into cafe (store, menu, price) values ('starbucks', '제주 감귤 티', 5900);
+insert into cafe (store, menu, price) values ('starbucks', '자몽 티', 5800);
+insert into cafe (store, menu, price) values ('starbucks', '블렉 티', 5800);
+insert into cafe (store, menu, price) values ('starbucks', '망고 바나나', 6000);
+insert into cafe (store, menu, price) values ('starbucks', '피치%레몬', 6000);
+insert into cafe (store, menu, price) values ('starbucks', '콜드 블루', 4100);
+insert into cafe (store, menu, price) values ('starbucks', '초콜릿 모카', 4200);
+insert into cafe (store, menu, price) values ('starbucks', '얼 그레이 티', 6200);
+insert into cafe (store, menu, price) values ('starbucks', '자바 칩', 6300);
+insert into cafe (store, menu, price) values ('starbucks', '바닐라 요거트', 4500);
+insert into cafe (store, menu, price) values ('starbucks', '딸기 스무디', 6500);
+insert into cafe (store, menu, price) values ('starbucks', '망고 스무디', 6500);
+insert into cafe (store, menu, price) values ('starbucks', '멜론 스무디', 6500);
+insert into cafe (store, menu, price) values ('starbucks', '아이스티', 3000);
+
+insert into cafe (store, menu, price) values ('ediya', '아메리카노', 4000);
+insert into cafe (store, menu, price) values ('ediya', '돌체라떼', 5500);
+insert into cafe (store, menu, price) values ('ediya', '카페모카', 4000);
+insert into cafe (store, menu, price) values ('ediya', '카페라떼', 5100);
+insert into cafe (store, menu, price) values ('ediya', '에스프레소', 4100);
+insert into cafe (store, menu, price) values ('ediya', '카푸치노', 4200);
+insert into cafe (store, menu, price) values ('ediya', '민트 티', 5500);
+insert into cafe (store, menu, price) values ('ediya', '유자 티', 5200);
+insert into cafe (store, menu, price) values ('ediya', '녹차 티', 5200);
+insert into cafe (store, menu, price) values ('ediya', '라임 티', 5100);
+insert into cafe (store, menu, price) values ('ediya', '제주 감귤 티', 5200);
+insert into cafe (store, menu, price) values ('ediya', '자몽 티', 5200);
+insert into cafe (store, menu, price) values ('ediya', '블렉 티', 5200);
+insert into cafe (store, menu, price) values ('ediya', '망고 바나나', 3900);
+insert into cafe (store, menu, price) values ('ediya', '피치%레몬', 3800);
+insert into cafe (store, menu, price) values ('ediya', '콜드 블루', 3900);
+insert into cafe (store, menu, price) values ('ediya', '초콜릿 모카', 3800);
+insert into cafe (store, menu, price) values ('ediya', '얼 그레이 티', 6300);
+insert into cafe (store, menu, price) values ('ediya', '자바 칩', 6500);
+insert into cafe (store, menu, price) values ('ediya', '바닐라 요거트', 6400);
+insert into cafe (store, menu, price) values ('ediya', '딸기 스무디', 6600);
+insert into cafe (store, menu, price) values ('ediya', '망고 스무디', 6800);
+insert into cafe (store, menu, price) values ('ediya', '멜론 스무디', 6900);
+insert into cafe (store, menu, price) values ('ediya', '아이스티', 3500);
+
+insert into cafe (store, menu, price) values ('twosome', '아메리카노', 4700);
+insert into cafe (store, menu, price) values ('twosome', '돌체라떼', 5300);
+insert into cafe (store, menu, price) values ('twosome', '에스프레소', 4600);
+insert into cafe (store, menu, price) values ('twosome', '카페라떼', 5200);
+insert into cafe (store, menu, price) values ('twosome', '카페모카', 4700);
+insert into cafe (store, menu, price) values ('twosome', '카푸치노', 4600);
+insert into cafe (store, menu, price) values ('twosome', '민트 티', 5600);
+insert into cafe (store, menu, price) values ('twosome', '유자 티', 5400);
+insert into cafe (store, menu, price) values ('twosome', '녹차 티', 4900);
+insert into cafe (store, menu, price) values ('twosome', '라임 티', 4900);
+insert into cafe (store, menu, price) values ('twosome', '제주 감귤 티', 4900);
+insert into cafe (store, menu, price) values ('twosome', '자몽 티', 4800);
+insert into cafe (store, menu, price) values ('twosome', '블렉 티', 4800);
+insert into cafe (store, menu, price) values ('twosome', '망고 바나나', 4000);
+insert into cafe (store, menu, price) values ('twosome', '피치%레몬', 4000);
+insert into cafe (store, menu, price) values ('twosome', '콜드 블루', 4400);
+insert into cafe (store, menu, price) values ('twosome', '초콜릿 모카', 4600);
+insert into cafe (store, menu, price) values ('twosome', '얼 그레이 티', 4200);
+insert into cafe (store, menu, price) values ('twosome', '자바 칩', 5300);
+insert into cafe (store, menu, price) values ('twosome', '바닐라 요거트', 5500);
+insert into cafe (store, menu, price) values ('twosome', '딸기 스무디', 5500);
+insert into cafe (store, menu, price) values ('twosome', '망고 스무디', 5500);
+insert into cafe (store, menu, price) values ('twosome', '멜론 스무디', 5500);
+insert into cafe (store, menu, price) values ('twosome', '아이스티', 4000);
+
+select * from cafe;
++-------+-----------+---------------+-------+----------+------+
+| seqNo | store     | menu          | price | isCoupon | time |
++-------+-----------+---------------+-------+----------+------+
+|     1 | starbucks | 아메리카노    |  4500 |        1 | NULL |
+|     2 | starbucks | 돌체라떼      |  5900 |        0 | NULL |
+|     3 | starbucks | 카페모카      |  4500 |        0 | NULL |
+|     4 | starbucks | 카페라떼      |  5000 |        0 | NULL |
+|     5 | starbucks | 에스프레소    |  4800 |        0 | NULL |
+|     6 | starbucks | 카푸치노      |  4900 |        0 | NULL |
+|     7 | starbucks | 민트 티       |  5800 |        1 | NULL |
+|     8 | starbucks | 유자 티       |  5900 |        0 | NULL |
+|     9 | starbucks | 녹차 티       |  5900 |        1 | NULL |
+|    10 | starbucks | 라임 티       |  3900 |        0 | NULL |
+|    11 | starbucks | 제주 감귤 티  |  5900 |        0 | NULL |
+|    12 | starbucks | 자몽 티       |  5800 |        0 | NULL |
+|    13 | starbucks | 블렉 티       |  5800 |        0 | NULL |
+|    14 | starbucks | 망고 바나나   |  6000 |        1 | NULL |
+|    15 | starbucks | 피치%레몬     |  6000 |        0 | NULL |
+|    16 | starbucks | 콜드 블루     |  4100 |        0 | NULL |
+|    17 | starbucks | 초콜릿 모카   |  4200 |        0 | NULL |
+|    18 | starbucks | 얼 그레이 티  |  6200 |        1 | NULL |
+|    19 | starbucks | 자바 칩       |  6300 |        1 | NULL |
+|    20 | starbucks | 바닐라 요거트 |  4500 |        0 | NULL |
+|    21 | starbucks | 딸기 스무디   |  6500 |        1 | NULL |
+|    22 | starbucks | 망고 스무디   |  6500 |        0 | NULL |
+|    23 | starbucks | 멜론 스무디   |  6500 |        1 | NULL |
+|    24 | starbucks | 아이스티      |  3000 |        0 | NULL |
+|    25 | ediya     | 아메리카노    |  4000 |        0 | NULL |
+|    26 | ediya     | 돌체라떼      |  5500 |        0 | NULL |
+|    27 | ediya     | 카페모카      |  4000 |        0 | NULL |
+|    28 | ediya     | 카페라떼      |  5100 |        0 | NULL |
+|    29 | ediya     | 에스프레소    |  4100 |        0 | NULL |
+|    30 | ediya     | 카푸치노      |  4200 |        0 | NULL |
+|    31 | ediya     | 민트 티       |  5500 |        1 | NULL |
+|    32 | ediya     | 유자 티       |  5200 |        1 | NULL |
+|    33 | ediya     | 녹차 티       |  5200 |        0 | NULL |
+|    34 | ediya     | 라임 티       |  5100 |        0 | NULL |
+|    35 | ediya     | 제주 감귤 티  |  5200 |        0 | NULL |
+|    36 | ediya     | 자몽 티       |  5200 |        0 | NULL |
+|    37 | ediya     | 블렉 티       |  5200 |        1 | NULL |
+|    38 | ediya     | 망고 바나나   |  3900 |        1 | NULL |
+|    39 | ediya     | 피치%레몬     |  3800 |        0 | NULL |
+|    40 | ediya     | 콜드 블루     |  3900 |        1 | NULL |
+|    41 | ediya     | 초콜릿 모카   |  3800 |        0 | NULL |
+|    42 | ediya     | 얼 그레이 티  |  6300 |        0 | NULL |
+|    43 | ediya     | 자바 칩       |  6500 |        0 | NULL |
+|    44 | ediya     | 바닐라 요거트 |  6400 |        1 | NULL |
+|    45 | ediya     | 딸기 스무디   |  6600 |        1 | NULL |
+|    46 | ediya     | 망고 스무디   |  6800 |        0 | NULL |
+|    47 | ediya     | 멜론 스무디   |  6900 |        0 | NULL |
+|    48 | ediya     | 아이스티      |  3500 |        0 | NULL |
+|    49 | twosome   | 아메리카노    |  4700 |        1 | NULL |
+|    50 | twosome   | 돌체라떼      |  5300 |        0 | NULL |
+|    51 | twosome   | 에스프레소    |  4600 |        0 | NULL |
+|    52 | twosome   | 카페라떼      |  5200 |        0 | NULL |
+|    53 | twosome   | 카페모카      |  4700 |        0 | NULL |
+|    54 | twosome   | 카푸치노      |  4600 |        1 | NULL |
+|    55 | twosome   | 민트 티       |  5600 |        0 | NULL |
+|    56 | twosome   | 유자 티       |  5400 |        0 | NULL |
+|    57 | twosome   | 녹차 티       |  4900 |        0 | NULL |
+|    58 | twosome   | 라임 티       |  4900 |        1 | NULL |
+|    59 | twosome   | 제주 감귤 티  |  4900 |        0 | NULL |
+|    60 | twosome   | 자몽 티       |  4800 |        0 | NULL |
+|    61 | twosome   | 블렉 티       |  4800 |        0 | NULL |
+|    62 | twosome   | 망고 바나나   |  4000 |        1 | NULL |
+|    63 | twosome   | 피치%레몬     |  4000 |        0 | NULL |
+|    64 | twosome   | 콜드 블루     |  4400 |        0 | NULL |
+|    65 | twosome   | 초콜릿 모카   |  4600 |        1 | NULL |
+|    66 | twosome   | 얼 그레이 티  |  4200 |        0 | NULL |
+|    67 | twosome   | 자바 칩       |  5300 |        1 | NULL |
+|    68 | twosome   | 바닐라 요거트 |  5500 |        0 | NULL |
+|    69 | twosome   | 딸기 스무디   |  5500 |        0 | NULL |
+|    70 | twosome   | 망고 스무디   |  5500 |        1 | NULL |
+|    71 | twosome   | 멜론 스무디   |  5500 |        1 | NULL |
+|    72 | twosome   | 아이스티      |  4000 |        1 | NULL |
++-------+-----------+---------------+-------+----------+------+
+
+select * from coupon;
++-------+-----------+---------------+
+| seqNo | store     | menu          |
++-------+-----------+---------------+
+|     1 | starbucks | 아메리카노    |
+|     2 | starbucks | 자바 칩       |
+|     3 | starbucks | 얼 그레이 티  |
+|     4 | starbucks | 망고 바나나   |
+|     5 | starbucks | 민트 티       |
+|     6 | starbucks | 녹차 티       |
+|     7 | starbucks | 딸기 스무디   |
+|     8 | starbucks | 멜론 스무디   |
+|     9 | ediya     | 민트 티       |
+|    10 | ediya     | 블렉 티       |
+|    11 | ediya     | 유자 티       |
+|    13 | ediya     | 망고 바나나   |
+|    14 | ediya     | 콜드 블루     |
+|    15 | ediya     | 바닐라 요거트 |
+|    16 | ediya     | 딸기 스무디   |
+|    17 | twosome   | 카푸치노      |
+|    18 | twosome   | 라임 티       |
+|    19 | twosome   | 망고 바나나   |
+|    20 | twosome   | 초콜릿 모카   |
+|    21 | twosome   | 자바 칩       |
+|    22 | twosome   | 멜론 스무디   |
+|    23 | twosome   | 망고 스무디   |
+|    24 | twosome   | 아이스티      |
++-------+-----------+---------------+
+
+select * from cafepayment;
++-------+-------+------------+-------+---------------------------------+
+| seqNo | store | menu       | price | time                            |
++-------+-------+------------+-------+---------------------------------+
