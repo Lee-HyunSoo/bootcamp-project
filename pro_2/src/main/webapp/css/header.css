@@ -1,0 +1,138 @@
+/* 헤더 전체 영역 */
+header{
+    /* 헤더부분의 하단부에 표시 선 생성 */
+    border-bottom: 1px solid rgba(0,0,0, .75);
+    /* 표시선의 그림자 생성 */
+    box-shadow: 0 0 5px rgba(0,0,0 .75);
+
+    /* 브라우저마다 색상 코드가 다르기 때문에 16진수 코드로 표현하는게 좋음, 반복되는건 3개로 축소 가능 */
+    background: #FFF;
+}
+
+/* 헤더 내부의 inner 클래스 */
+header .inner {
+    /* inner의 최대 너비 : 980 그 이하로 상황에 따라 줄어들 수 있음 */
+    /* max-width: 980px; */
+    height: 78px;
+    /* inner의 요소를 가운데 정렬하기 위해 */
+    /* margin을 쓰려면 특정 요소의 가로 사이즈가 정의 되있어야 한다. (max-width) */
+    /* margin: 0 auto; */
+}
+
+/* ------------------------------ header의 좌측 메뉴 그룹 ----------------------------- */
+
+header .menu-group {
+    /* 로고와 메뉴그룹을 다 수평정렬 하기 위해 */
+    display: flex;
+    /* 수직 정렬 */
+    align-items : center;
+    /* 메뉴그룹의 글씨가 작아 자체 높이가 작기 때문에 부모요소의 높이를 따르기 위해 100% */
+    height: 100%;
+}
+
+/* 메뉴그룹의 로고 */
+header .logo {
+    /* 로고와 메인메뉴 부분이 너무 붙어있어서 조금 떨어트림 */
+    margin-right: 10px;
+}
+
+/* 로고 내부의 a 태그 */
+header .logo a {
+    /* 로고 그림 가져옴 */
+    background: url("../img/logo.svg");
+    /* a 태그는 인라인 요소라 범위가 없음 -> 블록 요소로 만들고, 가로세로 넓이 정해줘야함 */
+    display: block;
+    width: 32px;
+    height: 32px;
+
+    /* 대체 텍스트를 지우진 않고 숨기기 위해 들여쓰기 기능 사용 */
+    text-indent: -9999px;
+}
+
+/* 로고에 마우스 대면 색상 변경을 위해 */
+header .logo a:hover {
+    /* hover 효과를 위해 다른 이미지로 대체해 버림 */
+    background: url("../img/logo_on.svg");
+}
+
+/* 메뉴그룹의 메인메뉴 */
+header .main-menu {
+    display: flex;
+}
+
+/* 메인메뉴 내부의 li 의 a 태그 */
+header .main-menu li a{
+    /* margin을 쓰면 순수하게 글씨에 마우스를 가져다대야 클릭가능, 너무 좁음 */
+    /* 글씨를 둘러싼 네모난 영역을 늘리기 위해 padding 사용 */
+    padding: 10px;
+    /* a 태그는 인라인 요소라 블럭요소로 바꿈 */
+    display:block;
+
+    color: #3c4146;
+}
+
+/* 메인메뉴에 마우스 올렸을때 색상 변경 */
+header .main-menu li a:hover {
+    color: #4078c0;
+}
+
+/* ------------------------------ header의 우측 메뉴 그룹 ----------------------------- */
+
+header .sign-group {
+    /* sign-group 내부의 자식요소인 1, 2, 3번을 수평으로 만들기 위해 */
+    display: flex;
+    /* 수직정렬 */
+    align-items: center;
+    /* 부모요소 inner에 높이를 맞추기 위해 */
+    height: 100%;   
+}
+
+header .btn-group {
+    /* 메뉴의 순서를 바꾸기 위해. 숫자가 높을수록 뒤로 감, 기본값 0 */
+    order: 2;
+    /* 버튼그룹의 sign in, sign up 버튼 사이에 미묘한 띄어쓰기 존재. inline 요소는 보통 글씨를 나타내기 때문에 html파일 a 태그 사이의 엔터로 다음줄로 넘어가는걸 띄어쓰기로 인식 */
+    /* 때문에 flex로 평평하게 설정해줘야 그 사이의 띄어쓰기 공간이 사라짐 */
+    display: flex;
+}
+
+header .btn-group .sign-in {
+    margin-right: 4px;
+}
+
+/* id는 고유한 속성이기 때문에 부모요소 필요 x */
+#search-form {
+    order: 1;
+    margin-right: 12px;
+}
+
+/* 검색 창 크기, 내부 글씨 크기 수정 */
+#search {
+    width: 160px;
+    font-size: 14px;
+}
+
+/* 매번 클래스를 부여할 수 없기 때문에 같은이름의 input이라 형제요소로 볼 수 있음 -> + [] 사용 */
+#search + [type="submit"] {
+    /* submit 버튼 안보이게 */
+    display: none;   
+}
+
+header .sub-menu {
+    /* 서브 메뉴를 수평정렬하기 위해 */
+    display: flex;
+    margin-right: 10px;
+}
+
+/* 서브메뉴 글씨들이 서로 너무 몰려있는 것을 해결하기 위해 */
+header .sub-menu a {
+    /* a는 인라인 요소라 padding의 위아래 값을 제대로 가질 수 없음 */
+    display: block;
+    padding: 8px;
+    font-size: 13px;
+    color: #3c4146;
+}
+
+/* 서브메뉴에 마우스 올리면 색상 변경 */
+header .sub-menu a:hover {
+    color: #4078c0;
+}

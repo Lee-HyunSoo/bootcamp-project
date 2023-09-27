@@ -1,0 +1,106 @@
+/* 특징들 */
+.section--feature {
+    background: #f5f5f5;
+    /* 중간내용들에서 조금 간격을 두기 위해 */
+    /* 마진을 쓰면 영역을 늘리는게아니라 구별해버려서 백그라운드색상 달라짐 */
+    padding-top: 66px;
+}
+
+/* 1 : 내용부분 */
+.section--feature .summary {
+    /* 820px 내에서 가운데 정렬하기 위해 */
+    max-width: 820px;
+    /* 가로너비가 정해져있어야 사용 가능 */
+    margin: 0 auto;
+    /* 텍스트 가운데 정렬 */
+    text-align: center;
+}
+
+/* 2. video */
+.section--feature .video {
+     /* 비디오의 가로사이즈 정해둠 */
+     max-width: 650px;
+     /* 위아래 50px 여백, 양옆은 가운데 정렬 */
+     margin: 50px auto;
+}
+
+.section--feature .video .video-ratio {
+     /* video에 높이값 사용 x, padding으로 높이 조절 */
+     height: 0;
+     /* %가 들어가면 부모요소의 가로사이즈에 영향받음. 즉 가로사이즈 500px에 영향받음 */
+     /* 500 : x = 16 : 9, x = 56.25 */
+     padding-top: 56.25%;
+     /* position: absolute를 위해 */
+     position: relative;
+}
+
+.section--feature .video .video-ratio iframe {
+    /* 부모 요소의 padding으로 인해 사각형이 그 내부로 못들어감. 그것을 해결하기 위한 position */
+    /* 부모 요소를 기준으로 배치 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 3. tiles */
+.section--feature .tiles {
+    /* 위아래에 구분선 하나씩 삽입 */
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.section--feature .tiles .inner {
+    /* 위에서 정의한 inner에서 가로너비만 더 늘림 */
+    max-width: 1200px;
+}
+
+.section--feature .tiles ul {
+    /* flex로하면 반응형이 안됨 */
+    display: grid;
+    /* 각 컬럼이 1:1:1:1 비율로 출력되게 */
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.section--feature .tiles li {
+    padding: 34px 24px;
+    /* 글자 가운데 정렬 */
+    text-align: center;
+    line-height: 1.5;
+    /* 그림 사이사이에 얇은 구분선 */
+    border-right: 1px solid #e5e5e5;
+    /* padding과 border는 요소가 커지는 특성이 있기에 그것을 fix */
+    box-sizing: border-box;
+    
+    /* 그리드는 최신방식이라 구형 브라우저에선 안될수도 있음 
+    float: left;
+    width: 25%;
+    html ul class에 clearfix */
+}
+
+/* 마지막 사진의 오른쪽엔 구분선이 없기에 그것만 빼기 위해 */
+.section--feature .tiles li:last-child {
+    border-right: none;
+}
+
+.section--feature .tiles li img {
+    /* 최대 가로너비를 초기에 정해 이미지가 넘치는걸 방지 */
+    max-width: 100%;
+    /* 위 50px, 좌우 10% 아래 24px 여백*/
+    padding: 14px 10% 24px;
+    /* padding이 커지면 요소가 박스보다 커져버림을 방지 */
+    box-sizing: border-box;
+}
+
+.section--feature .tiles li h3 {
+    font-size: 18px;
+    font-weight: 500;
+    /* description과의 약간 여백 */
+    margin-bottom: 10px;
+}
+
+.section--feature .tiles li p {
+    font-size: 14px;
+    color: #767676;
+}

@@ -1,0 +1,125 @@
+Create database team1_travel;
+
+use team1_travel;
+
+CREATE TABLE user(
+USERIDX int(11) NOT NULL AUTO_INCREMENT, 
+USERID varchar(250) NOT NULL, 
+USERPW varchar(50) NOT NULL, 
+USERNAME varchar(50) NOT NULL, 
+USEREMAIL varchar(50) NOT NULL, 
+USERTEL varchar(50) NOT NULL,
+USERREGDATE datetime NOT NULL,
+PRIMARY KEY (USERIDX, USERID)
+);
+user인덱스
+user아이디
+user비번
+유저이름
+유저이메일
+유저전화번호
+유저등록일
+
+
+CREATE TABLE admin(
+ADMINIDX int(11) NOT NULL AUTO_INCREMENT,
+ADMINID varchar(250) NOT NULL, 
+ADMINPW varchar(50) NOT NULL, 
+ADMINNAME varchar(50) NOT NULL, 
+ADMINEMAIL varchar(50) NOT NULL, 
+ADMINTEL varchar(50) NOT NULL,
+ADMINREGDATE datetime NOT NULL,
+PRIMARY KEY (ADMINIDX, ADMINID)
+);
+관리자인덱스
+관리자아이디
+관리자비번
+관리자이름
+관리자이메일
+관리자전화번호
+관리자등록일
+
+
+CREATE TABLE item(
+TRVIDX int(11) NOT NULL AUTO_INCREMENT,
+TRVNAME varchar(50) NOT NULL,
+TRVDEPART varchar(50) NOT NULL,  
+TRVDEST varchar(50) NOT NULL, 
+TRVPRICE int(11) NOT NULL,
+TRVTCNT int(11) NOT NULL,
+TRVCCNT int(11) NOT NULL,
+TRVDEPDATE datetime NOT NULL,
+TRVDESTDATE datetime NOT NULL,
+PRIMARY KEY (TRVIDX)
+);
+여행인덱스
+여행이름
+여행출발지
+여행도착지
+여행가격
+상품 총인원
+상품 현재인원
+여행 출발시간
+여행 도착시간
+
+
+CREATE TABLE message(
+MSGIDX int(11) NOT NULL AUTO_INCREMENT,
+MSGNAME varchar(50) NOT NULL,
+MSGSENDER varchar(50) NOT NULL,
+MSGRECEIVER varchar(50) NOT NULL,
+MSGTITLE varchar(50) NOT NULL,
+MSGCONTENT text NOT NULL,
+MSGASKDATE datetime NOT NULL,
+MSGANSWERDATE datetime NULL,
+MSGUSERISREAD boolean NOT NULL default FALSE,
+MSGADMINISREAD boolean NOT NULL default FALSE,
+MSGADMINANSWER boolean NOT NULL default FALSE,
+PRIMARY KEY (MSGIDX)
+);
+메세지인덱스
+메세지보낸사람이름
+메세지보낸사람id
+메세지받는사람id
+메세지제목
+메세지내용
+유저 -> 관리자 메세지 보낸시간
+관리자 -> 유저 메세지 보낸시간
+유저 읽음 유무
+관리자 읽음 유무
+관리자 답변 여부
+
+
+CREATE TABLE purchase(
+TRVIDX int(11) NOT NULL,
+USERIDX int(11) NOT NULL,
+TRVPAY boolean NOT NULL default false,
+TRVAPPROVE boolean NOT NULL default false,
+FOREIGN KEY (TRVIDX) references item(TRVIDX) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (USERIDX) references user(USERIDX) ON DELETE CASCADE ON UPDATE CASCADE
+);
+여행인덱스 (유저가 신청한)
+유저인덱스 (여행신청한)
+결제여부 => 거짓 : 임시저장 / 참 : 결제 완료
+관리자 결제 승인 여부 => 참 : 결제 완료 => 내 결제함에서 조회 가능 / 거짓 : 승인 대기 
+
+
+CREATE TABLE travel_agency(
+check_value bigint not null default 0);
+
+
+-- 시연용 admin
+INSERT INTO admin (ADMINID, ADMINPW, ADMINNAME, ADMINEMAIL, ADMINTEL, ADMINREGDATE) values ('adminQNA', '1234', '본사_고객센터',  'bolt_qna@bolt.com', '010-0000-9999', now());
+INSERT INTO admin (ADMINID, ADMINPW, ADMINNAME, ADMINEMAIL, ADMINTEL, ADMINREGDATE) values ('adminSales1', '1234', '본사_영업1',  'bolt_sales1@bolt.com', '010-0000-9998', now());
+INSERT INTO admin (ADMINID, ADMINPW, ADMINNAME, ADMINEMAIL, ADMINTEL, ADMINREGDATE) values ('adminPresident', '1234', '본사_대표',  'bolt_president@bolt.com', '010-0000-9997', now());
+
+-- 시연용 item--
+INSERT INTO item (TRVNAME, TRVDEPART, TRVDEST, TRVPRICE, TRVTCNT, TRVCCNT, TRVDEPDATE, TRVDESTDATE)
+VALUES ('[Virgin Galactic] 고도100km 무중력 우주관광', '인천', '뉴멕시코', 318500000, 6, 0, '2023-09-01 09:00:00', '2023-09-15 18:00:00');
+INSERT INTO item (TRVNAME, TRVDEPART, TRVDEST, TRVPRICE, TRVTCNT, TRVCCNT, TRVDEPDATE, TRVDESTDATE)
+VALUES ('[Blue Origin] 카르만 라인 체험 우주관광 ', '서울', '텍사스', 381900000, 6, 0, '2023-09-21 12:00:00', '2023-10-05 10:00:00');
+INSERT INTO item (TRVNAME, TRVDEPART, TRVDEST, TRVPRICE, TRVTCNT, TRVCCNT, TRVDEPDATE, TRVDESTDATE)
+VALUES ('[Space X] 지구 궤도 72시간 체험 우주관광 ', '서울', '텍사스', 2015000000, 4, 3, '2023-10-25 08:00:00', '2023-11-25 15:00:00');
+
+
+

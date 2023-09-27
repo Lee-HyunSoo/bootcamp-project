@@ -1,0 +1,50 @@
+/* body 태그 내부의 요소 */
+.body__container {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    /* 로보토 폰트 가져올때 300, 400, 500 가져옴 */
+    font-weight: 400;
+    color: #333;    
+}
+
+/* a 태그는 기본적으로 글씨에 밑줄이 들어가서 그걸 공통적으로 없애기 위해 */
+a {
+    /* 밑줄 제거 */
+    text-decoration: none;
+}
+
+/* inner가 헤더나 중간빼고 다른부분에도 공통적으로 적용될 수 있기 때문에 모듈화 */
+.section {
+    /* 하위에서 올라올때 최종적으로 걸리게 하기 위해 */
+    position: relative;
+}
+.section .inner {
+    max-width: 980px;
+    /* 가로너비가 있을때 사용할 수 있는 가운데 정렬 0 auto */
+    margin: 0 auto;
+    /* padding이 들어갔을때 요소가 커지는 것을 방지 */
+    box-sizing: border-box;
+    /* inner를 기준으로 뭔가 배치될 수 있게 */
+    position: relative;
+}
+
+/* 내용 부분을 전체적으로 제어하기 위해, 추가적으로 부분만 바꾸고싶으면 따로 제어 가능 */
+.summary {
+
+}
+
+.summary__title {
+    font-size: 38px;
+    font-weight: 300;
+    /* 행간 */
+    line-height: 1.25;
+    margin-bottom: 18px;
+}
+
+.summary__description {
+    font-size: 26px;
+    font-weight: 300;
+    color: #767676;
+    /* 행간 */
+    line-height: 1.5;
+}

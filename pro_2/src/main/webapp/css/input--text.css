@@ -1,0 +1,45 @@
+/* .input으로 하면 모든 input요소에 적용이 되니 input의 text요소에만 적용 시키기 위해 내부 클래스 선언 */
+.input--text {
+    height: 34px;
+
+    /* 위아래, 좌우 */
+    padding: 0 10px;
+    /* 요소가 점점 커지면 내부가 망가질수 있으니 그에따라 맞출 수 있게 */
+    box-sizing: border-box;
+    /* 테두리 선 설정 */
+    border: 1px solid #ddd;
+    /* 테두리 모서리 둥글게 */
+    border-radius: 5px;
+    /* input에 마우스 댔을때 테두리를 제어하는게 outline인데, 까다로워서 border만 쓰기위해 */
+    outline: none;
+    /* 박스자체의 그림자 : 박스의 내부에 그림자 생성, x축, y축, 블러처리, 색상 */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.075);
+    
+    font-size: 16px;
+}
+
+/* input 박스 클릭 시 확실히 포커스 됨을 표시하기 위해 */
+.input--text:focus {
+    /* 클릭 시 테두리 색 변경 */
+    border-color: #51a7e8;
+    /* 클릭 시 그림자 나오는걸 그냥 설정하면 부모요소를 덮어버리기 때문에 부모요소의 그림자 설정을 쓰고 그 뒤에 추가 설정 */
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.075), 
+                0 0 5px rgba(81,167,232,.5);   
+}
+
+/* input 내부 placeholder의 글씨를 조절하고 싶은데 표준 기술이 없음, 임의로 하는 것 */
+/* Vendor Prefix : 브라우저 업체별 접두사 */
+/* 브라우저마다 내부에 표준이 아닌 실험적으로 사용하는 기술이 있음. 이걸 쓰려면 vendor prefix를 같이 써줘야 웹이 표준 기술이 아님을 인식 */
+
+/* chrome */
+.input--text::-webkit-input-placeholder {
+    color: #cacaca;
+}
+/* 인터넷 익스플로러 */
+.input--text::-ms-input-placeholder {
+    color: #cacaca;
+}
+/* firefox */
+.input--text::-moz-input-placeholder {
+    color: #cacaca;
+}

@@ -1,0 +1,47 @@
+/* pricing card */
+.section--pricing {
+    /* 배경에 그라데이션 */
+    background: linear-gradient(#f5f5f5, #fff);
+}
+
+.section--pricing .inner {
+    /* 위아래 여백 */
+    padding: 80px 0;
+}
+
+.section--pricing .card {
+    /* 카드의 내용 수평 */
+    display: flex;
+    /* 카드에 선으로 구별 */
+    border: 1px solid #e5e5e5;
+    /* 보더 테두리 둥글게 */
+    border-radius: 6px;
+    /* padding이나 border가 들어가면 요소가 넘치는것을 방지 */
+    box-sizing: border-box;
+}
+
+.section--pricing .card .cell {
+    /* 요소를 너무 타이트하지 않게 주변에 여백 */
+    padding: 24px;
+    display: flex;
+    /* 수평 가운데 정렬 */
+    justify-content: center;
+    /* 수직 가운데 정렬 */
+    align-items: center;
+}
+
+.section--pricing .card .cell1 .btn{
+    /* 버튼의 사이즈와 폰트크기 조절 */
+    height: 50px;
+    font-size: 16px;
+}
+
+.section--pricing .card .cell2 {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    /* 글들이 늘어나거나 줄어드는게 자유롭게 */
+    flex: 1;
+    /* 왼쪽에 구분선 */
+    border-left: 1px solid #e5e5e5;
+}

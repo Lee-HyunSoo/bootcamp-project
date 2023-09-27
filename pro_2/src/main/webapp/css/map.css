@@ -1,0 +1,23 @@
+/* 지도 */
+.section--where-is {
+
+}
+
+.section--where-is .inner {
+    /* 위쪽과 간격 */
+    padding-top: 80px;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    margin-top: 40px;
+    /* 맵에 사각형 선 */
+    border: 1px solid rgba(0,0,0, .2);
+    /* 아래에는 선이 없음 */
+    border-bottom: none;
+    /* 맵에 연한 그림자 삽입 */
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+    /* padding이나 border가 들어갈때는? */
+    box-sizing: border-box;
+}

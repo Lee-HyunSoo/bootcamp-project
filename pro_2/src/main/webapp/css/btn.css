@@ -1,0 +1,52 @@
+/* 버튼의 기본 설정 */
+.btn {
+    /* 버튼의 배경 색, linear-gradient 함수를 통해 입체감 */
+    background: #eee linear-gradient(to bottom, #fcfcfc, #eee);
+    /* 버튼의 사이즈 */
+    height: 34px;
+    /* 버튼의 테두리 */
+    border: 1px solid #d5d5d5;
+    /* 버튼 테두리의 각진 곳을 둥글게 */
+    border-radius: 4px;
+    /* 버튼 내부 요소 수평정렬 + 인라인 요소로 만들어 버튼의 가로 크기를 요소들에 맞는 사이즈로*/
+    display: inline-flex; 
+    /* 수직 정렬 (위아래) */
+    align-items: center;
+    /* 위아래 : 0, 좌우 : 12px의 공간을 줌 */
+    padding: 0 12px;
+
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    
+    /* 행 간격 */
+    line-height: 1.5;
+    /* 버튼에 마우스 올리면 포인터 모양 */
+    cursor: pointer;
+    /* 누를 수있는 영역을 버튼 크기만큼 하기 위해 */
+    box-sizing: border-box;
+    /* 일반적으로 버튼의 위치를 변경할 때 사용하지만, 이 경우 하위요소 hover의 absolute를 위해 설정 -> 암기 */
+    position: relative;
+}
+
+/* 버튼 클래스에 hover 속성을 넣어주기 위해 */
+.btn:hover::before {
+    /* 가상선택자 before에 의해 필수로 들어감 */
+    content: "";
+    /* btn:hover의 부모요소인 btn을 따르기 위해 */
+    position: absolute;
+    /* 부모 요소를 기준으로 배치. 왼쪽 상단을 기준으로 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 마우스를 올렸을때 색상 변경 */
+    background: rgba(0,0,0,.07);
+}
+
+/* 버튼 클래스 내부의 버튼--primary라는 클래스를 추가해 다른 색상 표현 */
+.btn.btn--primary {
+    border: 1px solid #65b836;
+    color: #fff;
+    background: #55a532 linear-gradient(#91dd70, #55ae2e);
+}

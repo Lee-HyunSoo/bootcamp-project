@@ -1,0 +1,18 @@
+/* 공중에 뜬 float 때문에 부모요소가 쪼그라드는 것을 해결하기 위해 */
+/* 가상요소 after을 통해 */
+.clearfix::after {
+    content: "";
+    /* 왼쪽 오른쪽 다 clear 해야하니까 */
+    clear: both;
+    display: block;
+}
+
+/* float 속성의 왼쪽 요소들 */
+.float--left {
+    float: left;
+}
+
+/* float 속성의 오른쪽 요소들 */
+.float--right {
+    float: right;
+}
